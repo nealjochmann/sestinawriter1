@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sestina App</title>
+</head>
+<body>
+	<h1>Sestina App</h1>
+	<ul>
+		{% for ew in endwords %}
+			<li>{{ew}}</li>
+		{% endfor %}
+	</ul>
+	<form action="{{ url_for('clearWords') }}" method="get">
+		<button type="submit">Clear word list</button>
+	</form>
+	<form action="{{ url_for('addWord') }}" method="post">
+		<input type="text" name="word" autofocus="autofocus">
+			<button type="submit">Add</button>
+			<button type="reset">Clear</button>
+		</input>
+	</form>
+	{% if endwords_count == 6 %}
+		<h2>You've collected 6 end words!</h2>
+		<form action="{{ url_for('writeSestina') }}" method="get">
+			<button type="submit">Write a sestina</button>
+		</form>
+	{% elif 0 < endwords_count < 6 %}
+		<h2>Add another end word...</h2>
+	{% elif endwords_count > 6 %}
+		<h2>You've collected too many end words...</h2>
+	{% endif %}
+</body>
+</html>

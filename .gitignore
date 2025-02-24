@@ -1,1 +1,3 @@
 #Ignoring the contents of flask_session at flask_session/.gitignore
+#...and also ignoring them here.
+flask_session/*

@@ -1,0 +1,3 @@
+To serve, go to the root directory of this project and do 
+python app.py
+Then go to localhost in chrome

@@ -12,7 +12,8 @@ lines = [] #TODO: move to session
 
 @app.route("/")
 def index():
-	session["ew_counter"] = 0
+	if len(session["endwords"]) == 0:
+		session["ew_counter"] = 0
 	return render_template("index.html", endwords_count=len(session["endwords"]))
 
 @app.route("/addword", methods=["POST"])

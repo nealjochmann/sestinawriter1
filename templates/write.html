@@ -11,8 +11,8 @@
 		</button>
 	</form>
 	<h4>Write a sestina with your chosen words:</h4>
-	{% for w in endwords %}
-		"{{ w }}"{% if w == endwords[5] %}. {% elif w == endwords[4] %}, and {% else %}, {% endif %}
+	{% for w in session.endwords %}
+		"{{ w }}"{% if w == session.endwords[5] %}. {% elif w == session.endwords[4] %}, and {% else %}, {% endif %}
 	{% endfor %}
 	<form action="{{ url_for('addLine') }}" method="post">
 		<input type="text" name="line"autofocus="autofocus">
@@ -24,6 +24,9 @@
 	</endword-prompt>
 	{% for l in lines %}
 		{{ l }}<br>
+	{% endfor %}
+	{% for s in stanzas %}
+		{{ s }}<br>
 	{% endfor %}
 </body>
 </html>

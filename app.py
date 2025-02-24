@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, url_for
+from stanza import *
 from flask_session import Session
 
 app = Flask(__name__, template_folder="templates")
@@ -9,11 +10,14 @@ Session(app)
 
 
 lines = [] #TODO: move to session
+stanzas = [] #TODO: move to session
+
 
 @app.route("/")
 def index():
 	if len(session["endwords"]) == 0:
 		session["ew_counter"] = 0
+		session["stanza_counter"] = 0
 	return render_template("index.html", endwords_count=len(session["endwords"]))
 
 @app.route("/addword", methods=["POST"])
@@ -31,12 +35,19 @@ def clearWords():
 
 @app.route("/write")
 def writeSestina():
-	return render_template("write.html", endwords=session["endwords"], lines=lines, lineindex=session["ew_counter"])
+	current_stanza = getStanzaAtIndex(session["endwords"], session["stanza_counter"])
+	return render_template("write.html", endwords=current_stanza, lines=lines, stanzas=stanzas, lineindex=session["ew_counter"])
 
 @app.route("/addline", methods=["POST"])
 def addLine():
 	lines.append(request.form['line'])
-	session["ew_counter"] += 1 #TODO: this will go outside of array bounds.
+	if session["ew_counter"] >= 5:
+		session["ew_counter"] = 0
+		finished_stanza = lines.copy()
+		stanzas.append(finished_stanza)
+		session["stanza_counter"] += 1
+	else: 
+		session["ew_counter"] += 1
 	return redirect(url_for("writeSestina"))
 
 

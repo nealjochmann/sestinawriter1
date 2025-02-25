@@ -1,3 +1,5 @@
+import random
+
 testStanza = ['first','second','third','fourth','fifth','sixth']
 
 
@@ -18,6 +20,17 @@ def getStanzaAtIndex(endwords, index):
 		index -= 1
 	return stanzaToReturn
 
+# given an envoi type, return array of indices for its order.
+def getEnvoiWordOrder(type):
+	wordOrder = [0,1,2,3,4,5]
+	if type == 'Bishop':
+		wordOrder = [5,4,1,3,2,0]
+	elif type == 'Ashbery':
+		wordOrder = [1,0,5,4,3,2]
+	elif type == 'Random':
+		random.shuffle(wordOrder)
+	return wordOrder
+
 
 ### TESTS ###
 def test_generateNextStanza():
@@ -36,11 +49,18 @@ def test_getStanzaAtIndex():
 	print("stanza 4:")
 	print(getStanzaAtIndex(testStanza, 3))#expect 5,3,2,6,1,4
 
+def test_getEnvoiWordOrder():
+	print(getEnvoiWordOrder('Bishop'))
+	print(getEnvoiWordOrder('Ashbery'))
+	print(getEnvoiWordOrder('Random'))
+
 def tests_run():
 	print("Testing generateNextStanza:")
 	test_generateNextStanza()
 	print("\nTesting getStanzaAtIndex:")
 	test_getStanzaAtIndex()
+	print("\nTesting getEnvoiWordOrder:")
+	test_getEnvoiWordOrder()
 
 # Uncomment this line to run tests:
 #tests_run()

@@ -45,6 +45,7 @@ def addLine():
 		session["ew_counter"] = 0
 		finished_stanza = lines.copy()
 		stanzas.append(finished_stanza)
+		lines.clear()
 		session["stanza_counter"] += 1
 	else: 
 		session["ew_counter"] += 1

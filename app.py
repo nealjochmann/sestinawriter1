@@ -11,6 +11,7 @@ Session(app)
 
 lines = [] #TODO: move to session
 stanzas = [] #TODO: move to session
+envoi_type = "Bishop" #TODO: make this configurable
 
 
 @app.route("/")
@@ -35,7 +36,12 @@ def clearWords():
 
 @app.route("/write")
 def writeSestina():
-	current_stanza = getStanzaAtIndex(session["endwords"], session["stanza_counter"])
+	if 0 <= session["stanza_counter"] <= 5: 
+		current_stanza = getStanzaAtIndex(session["endwords"], session["stanza_counter"])
+	elif session["stanza_counter"] == 6:
+		current_stanza = getEnvoiStanza(session["endwords"], envoi_type)
+	else:
+		current_stanza = ["Your sestina is complete!"]
 	return render_template("write.html", endwords=current_stanza, lines=lines, stanzas=stanzas, lineindex=session["ew_counter"])
 
 @app.route("/addline", methods=["POST"])

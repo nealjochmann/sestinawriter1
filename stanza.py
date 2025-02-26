@@ -31,6 +31,14 @@ def getEnvoiWordOrder(type):
 		random.shuffle(wordOrder)
 	return wordOrder
 
+# given endwords and an envoi type, return the envoi's endwords in order
+def getEnvoiStanza(endwords, envoi_type):
+	stanzaToReturn = []
+	wordOrder = getEnvoiWordOrder(envoi_type)
+	for i in wordOrder:
+		stanzaToReturn.append(endwords[i])
+	return stanzaToReturn
+
 
 ### TESTS ###
 def test_generateNextStanza():

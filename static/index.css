@@ -13,12 +13,14 @@ body {
   }
 
   .chosen-words {
-    height: 140px;
+    min-height: 140px;
+    height: flex;
     width: 200px;
     outline: 1px dotted black;
   }
 
   .too-many {
     outline-color: red;
+    outline-width: 2px;
   }
 }

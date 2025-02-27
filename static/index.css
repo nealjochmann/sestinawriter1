@@ -1,0 +1,14 @@
+body {
+
+  h1 {
+    color: #62baa2;
+  }
+
+  ul {
+    list-style-type: trad-chinese-informal;
+  }
+
+  .delete-buttons {
+    display: inline-flex;
+  }
+}

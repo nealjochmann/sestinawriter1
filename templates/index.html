@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Sestina App</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<h1>Sestina App</h1>
@@ -11,9 +13,18 @@
 			<li>{{ew}}</li>
 		{% endfor %}
 	</ul>
-	<form action="{{ url_for('clearWords') }}" method="get">
-		<button type="submit">Clear word list</button>
-	</form>
+	<div class='delete-buttons'>
+		<form action="{{ url_for('clearWords') }}" method="get">
+			<button type="submit">
+				<i class="fa fa-solid fa-trash"></i> all
+			</button>
+		</form>
+		<form action="{{ url_for('removeWord') }}" method="post">
+			<button type="submit">
+				<i class="fa fa-solid fa-trash"></i> last
+			</button>
+		</form>
+	</div>
 	<form action="{{ url_for('addWord') }}" method="post">
 		<input type="text" name="word" autofocus="autofocus">
 			<button type="submit">Add</button>

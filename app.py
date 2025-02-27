@@ -28,6 +28,11 @@ def addWord():
 		session["endwords"].append(word)
 	return redirect(url_for("index"))
 
+@app.route("/removeword", methods=["POST"])
+def removeWord():
+	session["endwords"].pop(len(session["endwords"]) - 1)
+	return redirect(url_for("index"))
+
 @app.route("/clear", methods=["GET"])
 def clearWords():
 	session["endwords"].clear()

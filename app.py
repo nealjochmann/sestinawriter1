@@ -37,6 +37,7 @@ def removeWord():
 def clearWords():
 	session["endwords"].clear()
 	lines.clear()
+	stanzas.clear()
 	return redirect(url_for("index"))
 
 @app.route("/write")

@@ -8,12 +8,14 @@
 </head>
 <body>
 	<h1>Sestina App</h1>
-	<ul>
-		{% for ew in session['endwords'] %}
-			<li>{{ew}}</li>
-		{% endfor %}
-	</ul>
-	<div class='delete-buttons'>
+	<div class="chosen-words {{'too-many' if endwords_count > 6}}">
+		<ul>
+			{% for ew in session['endwords'] %}
+				<li>{{ew}}</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="delete-buttons">
 		<form action="{{ url_for('clearWords') }}" method="get">
 			<button type="submit">
 				<i class="fa fa-solid fa-trash"></i> all
@@ -32,14 +34,14 @@
 		</input>
 	</form>
 	{% if endwords_count == 6 %}
-		<h2>You've collected 6 end words!</h2>
+		<h2>There ya go: 6 end words!</h2>
 		<form action="{{ url_for('writeSestina') }}" method="get">
 			<button type="submit">Write a sestina</button>
 		</form>
 	{% elif 0 < endwords_count < 6 %}
 		<h2>Add another end word...</h2>
 	{% elif endwords_count > 6 %}
-		<h2>You've collected too many end words...</h2>
+		<h2 class="too-many">Too many end words... <i class="fa fa-solid fa-trash"></i> one</h2>
 	{% endif %}
 </body>
 </html>

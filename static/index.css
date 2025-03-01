@@ -8,6 +8,17 @@ body {
     list-style-type: trad-chinese-informal;
   }
 
+  button.write-button {
+    display: inline-flex;
+
+    img {
+      height: 13px;
+      width: 13px;
+      padding-left: 5px;
+      padding-right: 1px;
+    }
+  }
+
   .delete-buttons {
     display: inline-flex;
   }

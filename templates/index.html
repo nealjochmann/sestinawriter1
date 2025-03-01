@@ -36,7 +36,10 @@
 	{% if endwords_count == 6 %}
 		<h2>There ya go: 6 end words!</h2>
 		<form action="{{ url_for('writeSestina') }}" method="get">
-			<button type="submit">Write a sestina</button>
+			<button class="write-button" type="submit">
+				Write a sestina 
+				<img src="{{ url_for('static', filename='images/pencil.png') }}"
+			</button>
 		</form>
 	{% elif 0 < endwords_count < 6 %}
 		<h2>Add another end word...</h2>

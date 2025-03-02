@@ -19,6 +19,7 @@ def index():
 	if len(session["endwords"]) == 0:
 		session["ew_counter"] = 0
 		session["stanza_counter"] = 0
+		session["completed_sestina"] = []
 	return render_template("index.html", endwords_count=len(session["endwords"]))
 
 @app.route("/addword", methods=["POST"])
@@ -38,6 +39,7 @@ def clearWords():
 	session["endwords"].clear()
 	lines.clear()
 	stanzas.clear()
+	session["completed_sestina"].clear()
 	return redirect(url_for("index"))
 
 @app.route("/write")
@@ -48,7 +50,7 @@ def writeSestina():
 		current_stanza = getEnvoiStanza(session["endwords"], envoi_type)
 	else:
 		current_stanza = ["Your sestina is complete!"]
-	return render_template("write.html", endwords=current_stanza, lines=lines, stanzas=stanzas, lineindex=session["ew_counter"])
+	return render_template("write.html", endwords=current_stanza, lines=lines, stanzas=session["completed_sestina"], lineindex=session["ew_counter"])
 
 @app.route("/addline", methods=["POST"])
 def addLine():
@@ -57,6 +59,7 @@ def addLine():
 		session["ew_counter"] = 0
 		finished_stanza = lines.copy()
 		stanzas.append(finished_stanza)
+		session["completed_sestina"].append(finished_stanza)
 		lines.clear()
 		session["stanza_counter"] += 1
 	else: 

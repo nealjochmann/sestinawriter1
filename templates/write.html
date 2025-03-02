@@ -20,8 +20,13 @@
 		</input>
 	</form>
 	<endword-prompt style="color: green;">
-	{{ endwords[lineindex] }}<br>
+		{{ endwords[lineindex] }}<br>
 	</endword-prompt>
+	{% if session.stanza_counter >= 6 %}
+		<form action="{{ url_for('downloadSestina') }}" method="get">
+			<button>Download your sestina</button>
+		</form>
+	{% endif %}
 	{% for l in lines %}
 		{{ l }}<br>
 	{% endfor %}

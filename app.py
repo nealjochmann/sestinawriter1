@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from stanza import *
+from format import *
 from flask_session import Session
 
 app = Flask(__name__, template_folder="templates")
@@ -64,6 +65,11 @@ def addLine():
 		session["stanza_counter"] += 1
 	else: 
 		session["ew_counter"] += 1
+	return redirect(url_for("writeSestina"))
+
+@app.route("/download", methods=["GET"])
+def downloadSestina():
+	writeSestinaToFile(session["completed_sestina"])
 	return redirect(url_for("writeSestina"))
 
 
